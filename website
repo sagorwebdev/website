@@ -1,0 +1,1243 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   SM Sagor Portfolio &amp; WordPress &amp; Webflow Developer
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: "Montserrat", sans-serif;
+    }
+    /* Sidebar styles */
+    #sidebar {
+      transition: transform 0.3s ease-in-out;
+      transform: translateX(-100%);
+    }
+    #sidebar.open {
+      transform: translateX(0);
+    }
+    /* Overlay */
+    #overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+    #overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Animation for Contact Me button */
+    @keyframes fadeInScroll {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-in-scroll {
+      animation: fadeInScroll 0.6s ease forwards;
+    }
+    body {
+      font-family: "Montserrat", sans-serif;
+    }
+    .inter-font {
+      font-family: "Inter", sans-serif;
+    }
+    /* Animation for the heading text */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    /* Typing animation */
+    .typing {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 0.15em solid #3ea6ff;
+      animation: typing 3.5s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+      display: inline-block;
+      max-width: 100%;
+      box-sizing: border-box;
+      width: 0;
+    }
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 7ch;
+      }
+    }
+    @keyframes blink-caret {
+      from,
+      to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: #3ea6ff;
+      }
+    }
+    /* Fade in animation for paragraph */
+    @keyframes fadeInParagraph {
+      0% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeInParagraph {
+      animation: fadeInParagraph 0.8s ease forwards;
+      opacity: 0;
+    }
+    /* Scroll animation for My Works button and paragraph */
+    .fade-in-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Latest Works fade in up */
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    /* Button click animation */
+    .btn-animate {
+      animation: btnClick 0.3s ease forwards;
+    }
+    @keyframes btnClick {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(0.95);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    /* Box shadow animation for testimonial cards */
+    @keyframes shadowPulse {
+      0%,
+      100% {
+        box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3);
+      }
+      50% {
+        box-shadow: 0 8px 30px rgba(62, 166, 255, 0.6);
+      }
+    }
+    .testimonial-card {
+      transition: box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3);
+    }
+    .testimonial-card:hover {
+      animation: shadowPulse 1.5s ease-in-out infinite;
+      box-shadow: 0 8px 30px rgba(62, 166, 255, 0.6);
+      transform: translateY(-4px);
+      transition: transform 0.3s ease;
+    }
+    /* Scroll animation for WordPress & Webflow Developer div */
+    .fade-in-scroll-wfw {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in-scroll-wfw.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Scroll animation for images */
+    .fade-in-scroll-img {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in-scroll-img.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Latest Works grid items hidden by default */
+    .work-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3);
+    }
+    .work-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Box shadow pulse animation for active WEBFLOW filter button */
+    @keyframes btnShadowPulse {
+      0%,
+      100% {
+        box-shadow: 0 0 8px 2px rgba(62, 166, 255, 0.6);
+      }
+      50% {
+        box-shadow: 0 0 16px 4px rgba(62, 166, 255, 1);
+      }
+    }
+    .filter-btn.webflow-active {
+      animation: btnShadowPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 8px 2px rgba(62, 166, 255, 0.6);
+    }
+    /* WHY CHOOSE ME Section Styles */
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+    body {
+      font-family: "Inter", sans-serif;
+    }
+    /* Animation for fadeInUp */
+    @keyframes fadeInUpWhyChoose {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeInUpWhyChoose {
+      animation: fadeInUpWhyChoose 1s ease forwards;
+    }
+    .opacity-0 {
+      opacity: 0;
+    }
+    /* Experience fade-up animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Project form fade-slide-up animation */
+    .fade-slide-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      will-change: opacity, transform;
+    }
+    .fade-slide-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Box shadow animation */
+    .shadow-animate {
+      box-shadow: 0 0 1px 0 rgba(59, 185, 247, 0.6);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+    .shadow-animate:hover {
+      box-shadow: 0 0 1px 1px rgba(59, 185, 247, 0.9);
+    }
+    /* Placeholder box click animation */
+    input::placeholder,
+    textarea::placeholder {
+      transition: color 0.3s ease;
+    }
+    input:focus::placeholder,
+    textarea:focus::placeholder {
+      color: transparent;
+      transition: color 0.3s ease;
+    }
+    input:focus,
+    textarea:focus {
+      outline: none;
+      box-shadow: 0 0 1px 1px rgba(59, 185, 247, 0.9);
+      border-color: #3bb9f7;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    section:first-child {
+      overflow: hidden;
+    }
+    button.book-meeting,
+    button.submit-now {
+      position: relative;
+      padding: 12px 35px;
+      background: #3bb9f7;
+      font-size: 17px;
+      font-weight: 500;
+      color: white;
+      border: 1px solid #3bb9f7;
+      border-radius: 5px;
+      box-shadow: 0 0 0 #3bb9f7aa;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      overflow: visible;
+      z-index: 10;
+    }
+    button.book-meeting:hover,
+    button.submit-now:hover {
+      background: transparent;
+      color: #3bb9f7;
+      box-shadow: 0 0 25px #3bb9f7aa;
+    }
+    /* Override icon color to #3bb9f7 */
+    .icon-blue {
+      color: #3bb9f7;
+    }
+    /* White background behind the icon with #3bb9f7 color */
+    .icon-bg {
+      background-color: #3bb9f7;
+      border-radius: 9999px;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .icon-bg img {
+      background-color: white;
+      border-radius: 9999px;
+      padding: 4px;
+      width: 32px;
+      height: 32px;
+    }
+  </style>
+ </head>
+ <body class="bg-[#0b1326] min-h-screen flex flex-col text-white relative">
+  <!-- Mobile Sidebar -->
+  <div class="hidden fixed inset-0 z-40" id="overlay">
+  </div>
+  <aside aria-label="Mobile Sidebar Navigation" class="fixed top-0 left-0 z-50 h-full w-64 bg-[#0b1326] border-r border-[#3ea6ff] shadow-lg flex flex-col p-6 space-y-8" id="sidebar">
+   <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center space-x-1">
+     <img alt="Logo letter s in white on transparent background" class="w-8 h-8" height="32" src="https://storage.googleapis.com/a1aa/image/6df5b35f-16ff-4e3c-986f-8be41dc5c8b3.jpg" width="32"/>
+     <span class="text-white font-semibold text-xl select-none">
+      Sagor
+     </span>
+    </div>
+    <button aria-label="Close sidebar" class="text-white text-2xl focus:outline-none hover:text-[#3ea6ff]" id="closeSidebarBtn">
+     ×
+    </button>
+   </div>
+   <nav class="flex flex-col space-y-6 text-lg font-medium" role="navigation">
+    <a class="hover:text-[#3ea6ff] transition" href="#Home" onclick="closeSidebar()" tabindex="0">
+     Home
+    </a>
+    <a class="hover:text-[#3ea6ff] transition" href="#web-designer-developer" onclick="closeSidebar()" tabindex="0">
+     About Me
+    </a>
+    <a class="hover:text-[#3ea6ff] transition" href="#latest-works" onclick="closeSidebar()" tabindex="0">
+     All Work
+    </a>
+    <a class="hover:text-[#3ea6ff] transition" href="#Testimonial" onclick="closeSidebar()" tabindex="0">
+     Testimonial
+    </a>
+   </nav>
+   <button class="mt-auto text-white border border-[#3ea6ff] rounded-full px-6 py-2 text-base font-normal hover:bg-[#3ea6ff] transition fade-in-scroll" id="sidebarContactBtn" onclick="closeSidebar()" type="button">
+    <a class="hover:text-[#3ea6ff] transition" href="#footer">
+     Contact Me
+    </a>
+   </button>
+  </aside>
+  <!-- Header -->
+  <header class="w-full flex justify-center pt-6 relative z-30">
+   <nav aria-label="Primary Navigation" class="w-[90vw] max-w-[1200px] border border-[#3ea6ff] rounded-lg flex items-center justify-between px-6 py-3" role="navigation">
+    <div class="flex items-center space-x-1">
+     <img alt="Logo letter s in white on transparent background" class="w-8 h-8 fade-in-scroll-img" height="32" src="https://storage.googleapis.com/a1aa/image/6df5b35f-16ff-4e3c-986f-8be41dc5c8b3.jpg" width="32"/>
+     <span class="text-white font-semibold text-xl select-none">
+      Sagor
+     </span>
+    </div>
+    <ul class="hidden sm:flex space-x-10 text-white text-base font-normal">
+     <li>
+      <a class="hover:text-[#3ea6ff] transition" href="#Home">
+       Home
+      </a>
+     </li>
+     <li class="cursor-pointer hover:text-[#3ea6ff] transition">
+      <a class="hover:text-[#3ea6ff] transition" href="#web-designer-developer">
+       About Me
+      </a>
+     </li>
+     <li class="cursor-pointer hover:text-[#3ea6ff] transition">
+      <a class="hover:text-[#3ea6ff] transition" href="#latest-works">
+       All Work
+      </a>
+     </li>
+     <li class="cursor-pointer hover:text-[#3ea6ff] transition">
+      <a class="hover:text-[#3ea6ff] transition" href="#Testimonial">
+       Testimonial
+      </a>
+     </li>
+    </ul>
+    <button class="hidden sm:block text-white border border-[#3ea6ff] rounded-full px-6 py-2 text-base font-normal hover:bg-[#3ea6ff] transition fade-in-scroll" id="myWorksBtn" type="button">
+     <a class="hover:text-[#3ea6ff] transition" href="#footer">
+      Contact Me
+     </a>
+    </button>
+    <button aria-label="Open sidebar" class="sm:hidden text-white text-2xl focus:outline-none hover:text-[#3ea6ff] ml-4" id="openSidebarBtn">
+     <i class="fas fa-bars">
+     </i>
+    </button>
+   </nav>
+  </header>
+  <main class="flex flex-col-reverse lg:flex-row items-center justify-center flex-grow w-[90vw] max-w-[1200px] mx-auto mt-16 gap-12">
+   <section class="max-w-lg text-white text-center lg:text-left" id="Home">
+    <h3 class="font-extrabold text-[2.75rem] leading-[1.1] mb-6 select-none animate-fadeInUp" style="font-feature-settings: 'liga' 0">
+     "Helping You To
+     <br/>
+     Create Successful
+     <br/>
+     <span class="typing">
+      Website"
+     </span>
+    </h3>
+    <p class="text-sm font-normal leading-relaxed mb-8 max-w-md fade-in-scroll" id="introParagraph">
+     In today's digital age, having a professionally-designed website is crucial
+        for businesses and individuals alike. A well-crafted website can serve as a
+        powerful tool to attract more leads, generate sales, and build a strong fan
+        base.
+    </p>
+    <button class="border border-[#3ea6ff] rounded-full px-6 py-2 text-base font-normal hover:bg-[#3ea6ff] transition fade-in-scroll" id="myWorksBtnMobile" type="button">
+     My Works
+    </button>
+   </section>
+   <section class="max-w-xl w-full">
+    <img alt="Collage of website screenshots showing various portfolio projects with a bright blue background and rounded corners" class="rounded-xl w-full object-cover fade-in-scroll-img" height="400" src="https://storage.googleapis.com/a1aa/image/44a8510c-2dab-463d-05aa-512cdae3404f.jpg" width="600"/>
+   </section>
+  </main>
+  <section class="bg-[#0c162b] text-white py-16 mt-20">
+   <main class="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20">
+    <section class="flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-0">
+     <div class="md:w-1/2 max-w-lg inter-font fade-in-scroll-wfw" id="web-designer-developer">
+      <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight mb-6">
+       "Web Designer &amp;
+       <br/>
+       Developer"
+      </h1>
+      <p class="text-base sm:text-lg font-normal leading-relaxed mb-8 text-[#e1e1e1]">
+       Hello, I'm Ahmed Sagor. I'm a dedicated Web Developer expert based in Bangladesh.
+            I have successfully completed more than 40+ business websites, contributing to the growth and success of numerous organizations.
+            I am a top-rated seller on Upwork and a Level One seller on Fiverr.
+      </p>
+      <div class="flex space-x-3">
+       <a aria-label="Facebook" class="bg-[#2d9cfc] hover:bg-[#1e7de8] transition-colors duration-300 rounded-md p-3 flex items-center justify-center text-white text-lg" href="https://www.facebook.com/share/1GG73nrUs6/" rel="noopener noreferrer" target="_blank">
+        <i class="fab fa-facebook-f">
+        </i>
+       </a>
+       <a aria-label="LinkedIn" class="bg-[#2d9cfc] hover:bg-[#1e7de8] transition-colors duration-300 rounded-md p-3 flex items-center justify-center text-white text-lg" href="#" rel="noopener noreferrer" target="_blank">
+        <i class="fab fa-linkedin-in">
+        </i>
+       </a>
+       <a aria-label="Instagram" class="bg-[#2d9cfc] hover:bg-[#1e7de8] transition-colors duration-300 rounded-md p-3 flex items-center justify-center text-white text-lg" href="#" rel="noopener noreferrer" target="_blank">
+        <i class="fab fa-instagram">
+        </i>
+       </a>
+       <a aria-label="Behance" class="bg-[#2d9cfc] hover:bg-[#1e7de8] transition-colors duration-300 rounded-md p-3 flex items-center justify-center text-white text-lg font-bold" href="#" rel="noopener noreferrer" target="_blank">
+        Bē
+       </a>
+      </div>
+     </div>
+     <div class="md:w-1/2 flex justify-center">
+      <img alt="Photo of a man wearing blue shirt and glasses sitting in front of computer screens with Webflow and WordPress expert badges" class="w-full max-w-md object-cover rounded-md fade-in-scroll-img" height="600" src="https://storage.googleapis.com/a1aa/image/84b12f52-c319-4ee8-ea37-2e5706b24cb1.jpg" width="800"/>
+     </div>
+    </section>
+    <section class="mt-32 text-center max-w-3xl mx-auto fade-in-scroll" id="MY SERVICES">
+     <h2 class="text-3xl font-extrabold mb-6">
+      MY
+      <span class="text-[#2d9cfc]">
+       SERVICES
+      </span>
+     </h2>
+     <p class="text-base sm:text-lg font-normal leading-relaxed text-[#e1e1e1]">
+      I offer comprehensive WordPress &amp; Webflow services, including website
+          design, development, customization and maintenance to help businesses create
+          and manage their online presence effectively.
+     </p>
+    </section>
+    <section class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
+     <article class="bg-[#14243d] rounded-lg p-6 flex flex-col items-center text-center text-white shadow-lg hover:shadow-[#3ea6ff]/50 transition fade-in-scroll">
+      <img alt="Icon of a computer screen with code brackets representing website design" class="w-16 h-16 mb-4 fade-in-scroll-img" height="64" src="https://storage.googleapis.com/a1aa/image/1745c405-ae69-40eb-437c-c41a426cdb79.jpg" width="64"/>
+      <h3 class="text-xl font-semibold mb-2">
+       Website Design
+      </h3>
+      <p class="text-sm leading-relaxed">
+       Crafting visually stunning and user-friendly website designs that engage
+            visitors and reflect your brand identity.
+      </p>
+     </article>
+     <article class="bg-[#14243d] rounded-lg p-6 flex flex-col items-center text-center text-white shadow-lg hover:shadow-[#3ea6ff]/50 transition fade-in-scroll">
+      <img alt="Icon of a gear and wrench representing website development" class="w-16 h-16 mb-4 fade-in-scroll-img" height="64" src="https://storage.googleapis.com/a1aa/image/49993997-4936-4e9f-bf9e-a4034b95be81.jpg" width="64"/>
+      <h3 class="text-xl font-semibold mb-2">
+       Website Development
+      </h3>
+      <p class="text-sm leading-relaxed">
+       Building responsive, fast, and SEO-friendly websites using WordPress and
+            Webflow platforms.
+      </p>
+     </article>
+     <article class="bg-[#14243d] rounded-lg p-6 flex flex-col items-center text-center text-white shadow-lg hover:shadow-[#3ea6ff]/50 transition fade-in-scroll">
+      <img alt="Icon of a paintbrush and palette representing customization" class="w-16 h-16 mb-4 fade-in-scroll-img" height="64" src="https://storage.googleapis.com/a1aa/image/0e4c8261-7a3d-4a28-546d-966260f47e3d.jpg" width="64"/>
+      <h3 class="text-xl font-semibold mb-2">
+       Customization
+      </h3>
+      <p class="text-sm leading-relaxed">
+       Tailoring themes, plugins, and layouts to meet your unique business needs
+            and preferences.
+      </p>
+     </article>
+     <article class="bg-[#14243d] rounded-lg p-6 flex flex-col items-center text-center text-white shadow-lg hover:shadow-[#3ea6ff]/50 transition fade-in-scroll">
+      <img alt="Icon of a shield with a checkmark representing website security and maintenance" class="w-16 h-16 mb-4 fade-in-scroll-img" height="64" src="https://storage.googleapis.com/a1aa/image/1bcebd01-4f88-4cea-2393-ec3b80aa5712.jpg" width="64"/>
+      <h3 class="text-xl font-semibold mb-2">
+       Maintenance &amp; Security
+      </h3>
+      <p class="text-sm leading-relaxed">
+       Providing ongoing support, updates, backups, and security measures to keep
+            your website safe and running smoothly.
+      </p>
+     </article>
+     <article class="bg-[#14243d] rounded-lg p-6 flex flex-col items-center text-center text-white shadow-lg hover:shadow-[#3ea6ff]/50 transition fade-in-scroll">
+      <img alt="Icon of a mobile phone representing responsive design" class="w-16 h-16 mb-4 fade-in-scroll-img" height="64" src="https://storage.googleapis.com/a1aa/image/1b3b4308-f0ca-4bde-4178-d978e770c21b.jpg" width="64"/>
+      <h3 class="text-xl font-semibold mb-2">
+       Responsive Design
+      </h3>
+      <p class="text-sm leading-relaxed">
+       Ensuring your website looks and works perfectly on all devices, from
+            desktops to smartphones.
+      </p>
+     </article>
+     <article class="bg-[#14243d] rounded-lg p-6 flex flex-col items-center text-center text-white shadow-lg hover:shadow-[#3ea6ff]/50 transition fade-in-scroll">
+      <img alt="Icon of a magnifying glass over a webpage representing SEO optimization" class="w-16 h-16 mb-4 fade-in-scroll-img" height="64" src="https://storage.googleapis.com/a1aa/image/3540d26b-5194-4dc1-9394-36da635b0e7f.jpg" width="64"/>
+      <h3 class="text-xl font-semibold mb-2">
+       SEO Optimization
+      </h3>
+      <p class="text-sm leading-relaxed">
+       Optimizing your website structure and content to improve search engine
+            rankings and increase organic traffic.
+      </p>
+     </article>
+    </section>
+   </main>
+  </section>
+  <!-- Latest ALL Works Section -->
+  <section class="bg-[#0b1326] text-white py-16 px-4" id="latest-works">
+   <section class="text-center max-w-4xl mx-auto">
+    <h2 class="text-3xl font-extrabold fade-in-up">
+     MY LATEST
+     <span class="text-[#3ea6f2]">
+      ALL WORKS
+     </span>
+    </h2>
+    <p class="mt-4 text-base font-normal max-w-xl mx-auto leading-relaxed fade-in-up" style="animation-delay: 0.2s">
+     A Comprehensive Collection of My Latest Works. Feel free to go through an
+        extensive collection of our recent projects.
+    </p>
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto" id="worksGrid">
+     <article aria-label="Business WordPress Website project" class="work-item bg-[#14243d] rounded-lg overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-[1.03] fade-in-scroll-img" data-category="wordpress" role="article" style="box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3)" tabindex="0">
+      <img alt="Screenshot of a modern WordPress business website homepage with blue and white color scheme" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/a4764507-0cd1-4086-db57-783ed75eb4fe.jpg" width="600"/>
+      <div class="p-4">
+       <h3 class="text-xl font-semibold mb-2">
+        Business WordPress Website
+       </h3>
+       <p class="text-sm text-[#cbd5e1]">
+        A professional WordPress website designed for a corporate business with
+              responsive layout and SEO optimization.
+       </p>
+      </div>
+     </article>
+     <article aria-label="Creative Webflow Portfolio project" class="work-item bg-[#14243d] rounded-lg overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-[1.03] fade-in-scroll-img" data-category="webflow" role="article" style="box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3)" tabindex="0">
+      <img alt="Screenshot of a creative Webflow portfolio website with dark theme and interactive elements" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/cdaec3bb-8743-46ec-df01-67268b387306.jpg" width="600"/>
+      <div class="p-4">
+       <h3 class="text-xl font-semibold mb-2">
+        Creative Webflow Portfolio
+       </h3>
+       <p class="text-sm text-[#cbd5e1]">
+        A visually stunning Webflow portfolio site showcasing creative projects
+              with smooth animations.
+       </p>
+      </div>
+     </article>
+     <article aria-label="E-commerce WordPress Site project" class="work-item bg-[#14243d] rounded-lg overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-[1.03] fade-in-scroll-img" data-category="wordpress" role="article" style="box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3)" tabindex="0">
+      <img alt="Screenshot of an e-commerce WordPress website with product listings and shopping cart" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/b4843d5d-85ad-422a-280a-9bf72fedb33f.jpg" width="600"/>
+      <div class="p-4">
+       <h3 class="text-xl font-semibold mb-2">
+        E-commerce WordPress Site
+       </h3>
+       <p class="text-sm text-[#cbd5e1]">
+        An online store built with WordPress WooCommerce, featuring product
+              catalogs and secure checkout.
+       </p>
+      </div>
+     </article>
+     <article aria-label="Tech Startup Landing Page project" class="work-item bg-[#14243d] rounded-lg overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-[1.03] fade-in-scroll-img" data-category="webflow" role="article" style="box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3)" tabindex="0">
+      <img alt="Screenshot of a Webflow landing page for a tech startup with clean design and call to action" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/7cafac4f-6215-4503-7434-1724ce5b5cf6.jpg" width="600"/>
+      <div class="p-4">
+       <h3 class="text-xl font-semibold mb-2">
+        Tech Startup Landing Page
+       </h3>
+       <p class="text-sm text-[#cbd5e1]">
+        A clean and modern landing page designed in Webflow for a technology
+              startup to capture leads.
+       </p>
+      </div>
+     </article>
+     <article aria-label="Minimalist WordPress Blog project" class="work-item bg-[#14243d] rounded-lg overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-[1.03] fade-in-scroll-img" data-category="wordpress" role="article" style="box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3)" tabindex="0">
+      <img alt="Screenshot of a WordPress blog website with minimalist design and easy navigation" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/3309a9fc-f760-4142-98d7-eade68db4c29.jpg" width="600"/>
+      <div class="p-4">
+       <h3 class="text-xl font-semibold mb-2">
+        Minimalist WordPress Blog
+       </h3>
+       <p class="text-sm text-[#cbd5e1]">
+        A minimalist blog website built on WordPress with easy navigation and clean
+              typography.
+       </p>
+      </div>
+     </article>
+     <article aria-label="Event Website in Webflow project" class="work-item bg-[#14243d] rounded-lg overflow-hidden shadow-lg cursor-pointer transition transform hover:scale-[1.03] fade-in-scroll-img" data-category="webflow" role="article" style="box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3)" tabindex="0">
+      <img alt="Screenshot of a Webflow event website with schedule and registration form" class="w-full h-48 object-cover" height="400" src="https://storage.googleapis.com/a1aa/image/404fd629-9536-4284-eb45-9426b060ddaf.jpg" width="600"/>
+      <div class="p-4">
+       <h3 class="text-xl font-semibold mb-2">
+        Event Website in Webflow
+       </h3>
+       <p class="text-sm text-[#cbd5e1]">
+        An event website created with Webflow featuring event schedule, speakers,
+              and registration form.
+       </p>
+      </div>
+     </article>
+    </div>
+   </section>
+  </section>
+  <!-- Client Testimonials Section with updated background and smaller boxes with shadow animation -->
+  <section class="bg-gradient-to-tr from-[#0a1a2b] via-[#14436a] to-[#0a1a2b] text-gray-800 py-16 px-6" id="Testimonial">
+   <section class="max-w-7xl mx-auto">
+    <h2 class="text-3xl sm:text-4xl font-semibold text-center mb-4 text-white fade-in-up" id="heading">
+     <span>
+      CLIENT
+     </span>
+     <span class="text-[#3ea9f5] ml-2">
+      TESTIMONIALS
+     </span>
+    </h2>
+    <p class="text-center text-white max-w-3xl mx-auto mb-12 fade-in-up" id="subheading">
+     See what our clients say about us and our design and development work.
+    </p>
+    <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 max-w-5xl mx-auto">
+     <article aria-label="Testimonial from Ayesha Khan" class="testimonial-card bg-[#1e2e4a] p-5 rounded-xl shadow-md flex flex-col items-center text-center max-w-sm mx-auto" role="article" tabindex="0">
+      <img alt="Portrait of a smiling young South Asian woman with long black hair, wearing a blue blouse" class="w-20 h-20 rounded-full object-cover mb-3 fade-in-scroll-img" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/d0775ce5-df64-438c-f9ff-7192d92f9914.jpg" width="80"/>
+      <p class="mb-3 text-white text-sm">
+       "The web developer was fantastic! They delivered our website ahead of
+            schedule and the design exceeded our expectations. Communication was clear
+            and professional throughout."
+      </p>
+      <div class="font-semibold text-white text-base">
+       Ayesha Khan
+      </div>
+      <div aria-label="4.5 star rating" class="text-yellow-400 text-sm">
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star-half-alt">
+       </i>
+      </div>
+     </article>
+     <article aria-label="Testimonial from Michael Thompson" class="testimonial-card bg-[#1e2e4a] p-5 rounded-xl shadow-md flex flex-col items-center text-center max-w-sm mx-auto" role="article" tabindex="0">
+      <img alt="Portrait of a middle-aged Caucasian man with short brown hair and glasses, wearing a white shirt" class="w-20 h-20 rounded-full object-cover mb-3 fade-in-scroll-img" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/5fd151c8-c3cd-4c13-1978-434ec7b49bdb.jpg" width="80"/>
+      <p class="mb-3 text-white text-sm">
+       "Highly recommend! The developer understood our needs perfectly and
+            implemented all features flawlessly. The website is fast, responsive, and
+            visually appealing."
+      </p>
+      <div class="font-semibold text-white text-base">
+       Michael Thompson
+      </div>
+      <div aria-label="5 star rating" class="text-yellow-400 text-sm">
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+      </div>
+     </article>
+     <article aria-label="Testimonial from Jasmine Lee" class="testimonial-card bg-[#1e2e4a] p-5 rounded-xl shadow-md flex flex-col items-center text-center max-w-sm mx-auto" role="article" tabindex="0">
+      <img alt="Portrait of a smiling young Black woman with curly hair, wearing a red top" class="w-20 h-20 rounded-full object-cover mb-3 fade-in-scroll-img" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/1bf68814-9802-419d-ad91-a696d3073e74.jpg" width="80"/>
+      <p class="mb-3 text-white text-sm">
+       "Excellent work! The developer was very responsive and made sure every
+            detail was perfect. Our new site has already increased our customer
+            engagement."
+      </p>
+      <div class="font-semibold text-white text-base">
+       Jasmine Lee
+      </div>
+      <div aria-label="4 star rating" class="text-yellow-400 text-sm">
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star">
+       </i>
+       <i class="fas fa-star-half-alt">
+       </i>
+       <i class="far fa-star">
+       </i>
+      </div>
+     </article>
+    </div>
+   </section>
+  </section>
+  <!-- WHY CHOOSE ME Section -->
+  <section class="max-w-7xl mx-auto px-6 py-16 md:py-24 lg:py-32 bg-[#0b1326] text-white">
+   <div class="md:flex md:gap-24">
+    <div class="md:w-1/3 sticky top-16 self-start opacity-0" data-animate="" tabindex="0">
+     <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+      WHY
+      <span class="text-[#2F9CFF]">
+       CHOOSE
+      </span>
+      ME
+     </h2>
+     <p class="mt-6 text-base sm:text-lg font-normal leading-relaxed max-w-full sm:max-w-sm">
+      I prioritize quality of work and client experience. That's why you get a
+          range of powerups when you work with me!
+     </p>
+    </div>
+    <div class="md:w-2/3 space-y-10 mt-10 md:mt-0">
+     <div class="border border-gray-600 p-6 sm:p-8 max-w-full sm:max-w-lg bg-gradient-to-tr from-[#0B1324] via-[#164A72] to-[#0B1324] opacity-0" data-animate="" tabindex="0">
+      <p class="text-sm font-normal mb-3 sm:mb-4">
+       01.
+      </p>
+      <h3 class="text-lg sm:text-2xl font-semibold leading-tight mb-2 sm:mb-3">
+       Quality Design
+      </h3>
+      <p class="text-base font-normal leading-relaxed max-w-full sm:max-w-md">
+       I prioritize quality in every design I execute.
+      </p>
+     </div>
+     <div class="border border-gray-600 p-6 sm:p-8 max-w-full sm:max-w-lg bg-gradient-to-tr from-[#0B1324] via-[#164A72] to-[#0B1324] opacity-0" data-animate="" tabindex="0">
+      <p class="text-sm font-normal mb-3 sm:mb-4">
+       02.
+      </p>
+      <h3 class="text-lg sm:text-2xl font-semibold leading-tight mb-2 sm:mb-3">
+       Fully Responsive
+      </h3>
+      <p class="text-base font-normal leading-relaxed max-w-full sm:max-w-md">
+       All My websites are made fully responsive for different devices and
+            screens.
+      </p>
+     </div>
+     <div class="border border-gray-600 p-6 sm:p-8 max-w-full sm:max-w-lg bg-gradient-to-tr from-[#0B1324] via-[#164A72] to-[#0B1324] opacity-0" data-animate="" tabindex="0">
+      <p class="text-sm font-normal mb-3 sm:mb-4">
+       03.
+      </p>
+      <h3 class="text-lg sm:text-2xl font-semibold leading-tight mb-2 sm:mb-3">
+       Smooth Animations
+      </h3>
+      <p class="text-base font-normal leading-relaxed max-w-full sm:max-w-md">
+       I try to do smooth animatio on all pages
+      </p>
+     </div>
+     <div class="border border-gray-600 p-6 sm:p-8 max-w-full sm:max-w-lg bg-gradient-to-tr from-[#0B1324] via-[#164A72] to-[#0B1324] opacity-0" data-animate="" tabindex="0">
+      <p class="text-sm font-normal mb-3 sm:mb-4">
+       04.
+      </p>
+      <h3 class="text-lg sm:text-2xl font-semibold leading-tight mb-2 sm:mb-3">
+       Fast Delivery
+      </h3>
+      <p class="text-base font-normal leading-relaxed max-w-full sm:max-w-md">
+       I ensure timely delivery without compromising quality.
+      </p>
+     </div>
+     <div class="border border-gray-600 p-6 sm:p-8 max-w-full sm:max-w-lg bg-gradient-to-tr from-[#0B1324] via-[#164A72] to-[#0B1324] opacity-0" data-animate="" tabindex="0">
+      <p class="text-sm font-normal mb-3 sm:mb-4">
+       05.
+      </p>
+      <h3 class="text-lg sm:text-2xl font-semibold leading-tight mb-2 sm:mb-3">
+       Great Communication
+      </h3>
+      <p class="text-base font-normal leading-relaxed max-w-full sm:max-w-md">
+       I maintain clear and constant communication throughout the project.
+      </p>
+     </div>
+     <div class="border border-gray-600 p-6 sm:p-8 max-w-full sm:max-w-lg bg-gradient-to-tr from-[#0B1324] via-[#164A72] to-[#0B1324] opacity-0" data-animate="" tabindex="0">
+      <p class="text-sm font-normal mb-3 sm:mb-4">
+       06.
+      </p>
+      <h3 class="text-lg sm:text-2xl font-semibold leading-tight mb-2 sm:mb-3">
+       Continuous Support
+      </h3>
+      <p class="text-base font-normal leading-relaxed max-w-full sm:max-w-md">
+       I provide ongoing support even after project completion.
+      </p>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- Experience Section -->
+  <section class="flex flex-col items-center justify-center text-center px-6 py-20 max-w-4xl mx-auto w-full">
+   <h2 class="text-white text-3xl sm:text-4xl font-extrabold mb-6 fade-up" id="heading">
+    <span class="font-extrabold">
+     My
+    </span>
+    <span class="text-[#0ea5e9]">
+     EXPERIENCE
+    </span>
+   </h2>
+   <p class="text-white text-base sm:text-lg max-w-3xl leading-relaxed fade-up" id="paragraph">
+    Through a journey marked by invaluable experiences, I have nurtured an unwavering commitment to excellence. These transformative moments have empowered me to consistently surpass client expectations and approach intricate obstacles with unwavering assurance.
+   </p>
+  </section>
+  <!-- Project Form Section -->
+  <main class="max-w-[1200px] w-full mx-auto flex flex-col items-center px-6 mb-20">
+   <h1 class="text-3xl sm:text-4xl font-extrabold leading-tight max-w-[700px] text-center fade-slide-up" style="transition-delay: 0.1s">
+    Let me know about your
+    <span class="text-[#2F9CFF]">
+     project!
+    </span>
+   </h1>
+   <p class="text-sm font-normal mb-12 max-w-[700px] text-center fade-slide-up" style="transition-delay: 0.2s">
+    Please fill in the form below with all your project information and I will get back to you within 7/24 hours.
+   </p>
+   <form class="flex flex-col lg:flex-row gap-10 w-full max-w-[1000px] fade-slide-up" novalidate="" style="transition-delay: 0.3s">
+    <section class="flex flex-col justify-center rounded-lg border border-[#1a2a4a] p-10 max-w-lg flex-shrink-0 relative shadow-animate" style="background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 80%)">
+     <div class="icon-bg">
+      <img alt="White circular icon with blue phone symbol representing consultation" height="32" src="https://storage.googleapis.com/a1aa/image/b72693b8-3aa8-4a55-10be-0e90068fe1d7.jpg" width="32"/>
+     </div>
+     <h2 class="text-2xl font-semibold mb-4">
+      Get Free
+      <span class="text-[#2F9CFF]">
+       consultation
+      </span>
+     </h2>
+     <p class="text-sm font-normal mb-8 leading-relaxed max-w-[320px]">
+      Have a new project in mind? Schedule a 30-minute discovery call or fill out the quick form, and together we'll explore the possibilities.
+     </p>
+     <button aria-label="Book Meeting" class="book-meeting" type="button">
+      BOOK MEETING
+     </button>
+    </section>
+    <section class="flex-1 max-w-xl flex flex-col gap-6">
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 shadow-animate p-6 rounded-md border border-[#1a2a4a]">
+      <div class="flex flex-col">
+       <label class="text-xs font-semibold mb-1 uppercase" for="fullname">
+        FULL NAME
+       </label>
+       <input aria-required="true" class="bg-transparent border border-[#1a2a4a] rounded-md px-4 py-3 text-sm placeholder:text-[#3e4451] focus:outline-none" id="fullname" name="fullname" placeholder="Your Name" required="" type="text"/>
+      </div>
+      <div class="flex flex-col">
+       <label class="text-xs font-semibold mb-1 uppercase" for="phone">
+        PHONE NUMBER
+       </label>
+       <input aria-required="true" class="bg-transparent border border-[#1a2a4a] rounded-md px-4 py-3 text-sm placeholder:text-[#3e4451] focus:outline-none" id="phone" name="phone" pattern="^\+?[0-9\s\-]{7,15}$" placeholder="Your Phone Number" required="" title="Please enter a valid phone number" type="tel"/>
+      </div>
+     </div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 shadow-animate p-6 rounded-md border border-[#3e4451]">
+      <div class="flex flex-col">
+       <label class="text-xs font-semibold mb-1 uppercase" for="email">
+        EMAIL ADDRESS
+       </label>
+       <input aria-required="true" class="bg-transparent border border-[#1a2a4a] rounded-md px-4 py-3 text-sm placeholder:text-[#3e4451] focus:outline-none" id="email" name="email" placeholder="Enter Your Email" required="" type="email"/>
+      </div>
+      <div class="flex flex-col">
+       <label class="text-xs font-semibold mb-1" for="website">
+        Website(If you have)
+       </label>
+       <input class="bg-transparent border border-[#1a2a4a] rounded-md px-4 py-3 text-sm placeholder:text-[#3e4451] focus:outline-none" id="website" name="website" pattern="https?://.+" placeholder="Enter Your Website" title="Please enter a valid URL starting with http:// or https://" type="url"/>
+      </div>
+     </div>
+     <div class="flex flex-col shadow-animate p-6 rounded-md border border-[#1a2a4a]">
+      <label class="text-xs font-semibold mb-1" for="additional">
+       Additional Information
+      </label>
+      <textarea class="bg-transparent border border-[#1a2a4a] rounded-md px-4 py-3 text-sm placeholder:text-[#3e4451] focus:outline-none resize-none" id="additional" name="additional" placeholder="Please let me know any other pertinent information that I  should know prior to reaching out" rows="6"></textarea>
+     </div>
+     <div class="pt-4 flex justify-center">
+      <button class="submit-now" type="submit">
+       Submit Now
+      </button>
+     </div>
+    </section>
+   </form>
+  </main>
+  <!-- Footer Section -->
+  <footer class="bg-gradient-to-r from-[#0a1626] via-[#144164] to-[#0a1626] text-white py-12 px-6" id="footer">
+   <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-start gap-10 sm:gap-0">
+    <div class="sm:w-1/4">
+     <div class="flex items-center space-x-1 mb-6 fade-in-scroll" id="logo-text">
+      <img alt="Logo letter s in white on transparent background" class="w-8 h-8" height="32" src="https://storage.googleapis.com/a1aa/image/6df5b35f-16ff-4e3c-986f-8be41dc5c8b3.jpg" width="32"/>
+      <span class="text-white font-semibold text-xl select-none">
+       Sagor
+      </span>
+     </div>
+     <p class="text-base leading-relaxed max-w-xs fade-in-scroll" id="description">
+      I am Ahmed Sagor. I have 2 years experience of in WordPress &amp; Webflow. I
+          have completed almost 40+ Projects under Mint Media &amp; Orviko Web
+          Agency
+     </p>
+    </div>
+    <div class="sm:w-1/6">
+     <h3 class="text-xl font-semibold mb-6">
+      <a class="animated-link" href="#" tabindex="0">
+       Quick
+       <span class="text-[#2F9CFF]">
+        Link
+       </span>
+      </a>
+     </h3>
+     <ul class="space-y-5 text-base">
+      <li>
+       <a class="animated-link" href="#" tabindex="0">
+        Fiverr
+       </a>
+      </li>
+      <li>
+       <a class="animated-link" href="#" tabindex="0">
+        Upwork
+       </a>
+      </li>
+      <li>
+       <a class="animated-link" href="https://docs.google.com/document/d/1pryTjZOjC35Bh5RAHCDxDkUN4pwhBQgVkVCFYvjD1wY/edit?tab=t.0" rel="noopener noreferrer" tabindex="0" target="_blank">
+        Resume
+       </a>
+      </li>
+      <li>
+       <a class="animated-link" href="#" tabindex="0">
+        Free Consultation
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="sm:w-1/5">
+     <h3 class="text-xl font-semibold mb-6">
+      <a class="animated-link" href="#" tabindex="0">
+       My
+       <span class="text-[#2F9CFF]">
+        Services
+       </span>
+      </a>
+     </h3>
+     <ul class="space-y-5 text-base">
+      <li>
+       <a class="animated-link" href="#" tabindex="0">
+        Webflow Website
+       </a>
+      </li>
+      <li>
+       <a class="animated-link" href="#" tabindex="0">
+        WordPress Website
+       </a>
+      </li>
+      <li>
+       <a class="animated-link" href="#" tabindex="0">
+        Website Maintance
+       </a>
+      </li>
+      <li>
+       <a class="animated-link" href="#" tabindex="0">
+        Bug Fix
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="sm:w-1/4">
+     <h3 class="text-xl font-semibold mb-6">
+      <a class="animated-link" href="#" tabindex="0">
+       Contact
+       <span class="text-[#2F9CFF]">
+        Info
+       </span>
+      </a>
+     </h3>
+     <ul class="space-y-5 text-base">
+      <li class="flex items-center gap-3">
+       <i class="fas fa-phone-alt text-white text-lg">
+       </i>
+       <a class="animated-link" href="tel:01990891648" tabindex="0">
+        01920889341
+       </a>
+      </li>
+      <li class="flex items-center gap-3">
+       <i class="far fa-envelope text-white text-lg">
+       </i>
+       <a class="animated-link" href="mailto:ikram@orviko.com" tabindex="0">
+        sagordev.web@gmail.com
+       </a>
+      </li>
+     </ul>
+     <div class="flex gap-3 mt-6">
+      <a aria-label="Facebook" class="bg-[#3ea6f2] rounded px-4 py-3 flex items-center justify-center text-white text-xl" href="https://www.facebook.com/share/1GG73nrUs6/" rel="noopener noreferrer" target="_blank">
+       <i class="fab fa-facebook-f">
+       </i>
+      </a>
+      <a aria-label="LinkedIn" class="bg-[#3ea6f2] rounded px-4 py-3 flex items-center justify-center text-white text-xl" href="#" rel="noopener noreferrer" target="_blank">
+       <i class="fab fa-linkedin-in">
+       </i>
+      </a>
+      <a aria-label="Instagram" class="bg-[#3ea6f2] rounded px-4 py-3 flex items-center justify-center text-white text-xl" href="#" rel="noopener noreferrer" target="_blank">
+       <i class="fab fa-instagram">
+       </i>
+      </a>
+      <a aria-label="Behance" class="bg-[#3ea6f2] rounded px-4 py-3 flex items-center justify-center text-white text-xl" href="https://www.behance.net/ahmedsagor12" rel="noopener noreferrer" target="_blank">
+       <i class="fab fa-behance">
+       </i>
+      </a>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <style>
+   /* Link animation */
+    .animated-link {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .animated-link::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #3ea6f2;
+      left: 0;
+      bottom: -3px;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    .animated-link:hover,
+    .animated-link:focus {
+      color: #3ea6f2;
+      outline: none;
+    }
+    .animated-link:hover::after,
+    .animated-link:focus::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    /* Scroll down fade-in animation */
+    .fade-in-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+  <script>
+   // Scroll animation for elements with fade-in-scroll, fade-in-scroll-wfw, and fade-in-scroll-img classes
+    function onScrollFadeIn() {
+      const elements = document.querySelectorAll(
+        ".fade-in-scroll, .fade-in-scroll-wfw, .fade-in-scroll-img, .work-item"
+      );
+      const windowHeight = window.innerHeight;
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= windowHeight - 100) {
+          el.classList.add("visible");
+        }
+      });
+    }
+    window.addEventListener("scroll", onScrollFadeIn);
+    window.addEventListener("load", onScrollFadeIn);
+
+    // Filter buttons animation and active state toggle with box shadow animation for WEBFLOW button
+    const buttons = document.querySelectorAll(".filter-btn");
+    const works = document.querySelectorAll(".work-item");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        // Add animation class
+        button.classList.add("btn-animate");
+        // Remove animation class after animation ends
+        button.addEventListener(
+          "animationend",
+          () => {
+            button.classList.remove("btn-animate");
+          },
+          { once: true }
+        );
+
+        buttons.forEach((btn) => {
+          btn.classList.remove(
+            "bg-white",
+            "text-[#3ea6f2]",
+            "font-light",
+            "webflow-active"
+          );
+          btn.classList.add("text-white", "font-semibold", "border-white");
+        });
+
+        button.classList.add("bg-white", "text-[#3ea6f2]", "font-light");
+        button.classList.remove("text-white", "font-semibold");
+
+        // Add box shadow animation only to WEBFLOW button when active
+        if (button.getAttribute("data-filter") === "webflow") {
+          button.classList.add("webflow-active");
+        }
+
+        const filter = button.getAttribute("data-filter");
+
+        works.forEach((work) => {
+          if (filter === "all") {
+            work.classList.add("visible");
+          } else {
+            if (work.getAttribute("data-category") === filter) {
+              work.classList.add("visible");
+            } else {
+              work.classList.remove("visible");
+            }
+          }
+        });
+      });
+    });
+
+    // Initialize to show all works on load
+    window.addEventListener("load", () => {
+      works.forEach((work) => work.classList.add("visible"));
+      // Also add box shadow animation to WEBFLOW button if it is initially active
+      buttons.forEach((btn) => {
+        if (btn.getAttribute("data-filter") === "all") {
+          // no box shadow on all by default
+          btn.classList.remove("webflow-active");
+        }
+      });
+    });
+
+    // WHY CHOOSE ME Section Intersection Observer
+    const animatedElements = document.querySelectorAll("[data-animate]");
+    const observerOptions = {
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-fadeInUpWhyChoose");
+          entry.target.classList.remove("opacity-0");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    animatedElements.forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Experience fade-up scroll animation
+    function onScrollFade() {
+      const elements = document.querySelectorAll(".fade-up");
+      const windowBottom = window.innerHeight;
+
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < windowBottom - 50) {
+          el.classList.add("visible");
+        }
+      });
+    }
+    window.addEventListener("scroll", onScrollFade);
+    window.addEventListener("load", onScrollFade);
+
+    // Project form fade-slide-up scroll animation using IntersectionObserver
+    document.addEventListener("DOMContentLoaded", () => {
+      const animatedElements = document.querySelectorAll(".fade-slide-up");
+
+      const observerForm = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observerForm.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+        }
+      );
+
+      animatedElements.forEach((el) => {
+        observerForm.observe(el);
+      });
+    });
+
+    // Intersection Observer for fade-in scroll animation in footer
+    document.addEventListener("DOMContentLoaded", function () {
+      const fadeElems = document.querySelectorAll(".fade-in-scroll");
+      const observerFooter = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observerFooter.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+        }
+      );
+      fadeElems.forEach((el) => {
+        observerFooter.observe(el);
+      });
+    });
+    // Sidebar open/close handlers
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const openBtn = document.getElementById('openSidebarBtn');
+    const closeBtn = document.getElementById('closeSidebarBtn');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      overlay.classList.add('visible');
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('visible');
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    openBtn.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+  </script>
+ </body>
+</html>
